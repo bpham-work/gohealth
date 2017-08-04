@@ -10,6 +10,7 @@ jar {
         attributes 'Title': 'GoHealth Coding Exercise',
                    'Main-Class': 'com.gohealth.Main'
     }
+    destinationDir projectDir
 }
 
 sourceCompatibility = 1.8
