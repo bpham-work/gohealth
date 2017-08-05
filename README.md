@@ -1,7 +1,7 @@
-####Prerequisites:
+#### Prerequisites:
 Java 1.8
 
-####How to run:
+#### How to run:
 Build the jar
 ````
 ./gradlew build
