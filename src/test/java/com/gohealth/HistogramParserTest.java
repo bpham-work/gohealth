@@ -13,11 +13,11 @@ public class HistogramParserTest {
     private HistogramParser histogramParser = new HistogramParser();
 
     @Test
-    public void shouldParseLine() {
+    public void shouldParseStringForBigramCount() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "the quick brown fox and the quick blue hare";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(2, (int) histogramMap.get("the quick"));
         assertEquals(1, (int) histogramMap.get("quick brown"));
@@ -30,11 +30,11 @@ public class HistogramParserTest {
     }
 
     @Test
-    public void parsingLineShouldIgnoreCase() {
+    public void parsingStringShouldIgnoreCase() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "THE QUICK BROWN FOX QUICK BROWN";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(1, (int) histogramMap.get("the quick"));
         assertEquals(2, (int) histogramMap.get("quick brown"));
@@ -44,11 +44,11 @@ public class HistogramParserTest {
     }
 
     @Test
-    public void parsingLineShouldJoinHyphenatedWords() {
+    public void parsingStringShouldJoinHyphenatedWords() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "the quick-brown fox quick-brown fox";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(1, (int) histogramMap.get("the quick-brown"));
         assertEquals(2, (int) histogramMap.get("quick-brown fox"));
@@ -57,11 +57,11 @@ public class HistogramParserTest {
     }
 
     @Test
-    public void parsingLineShouldIgnorePunctuation() {
+    public void parsingStringShouldIgnorePunctuation() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "the, quick, brown. fox, quick brown.";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(1, (int) histogramMap.get("the quick"));
         assertEquals(2, (int) histogramMap.get("quick brown"));
@@ -71,11 +71,11 @@ public class HistogramParserTest {
     }
 
     @Test
-    public void parsingLineShouldIgnoreExtraWhitespace() {
+    public void parsingStringShouldIgnoreExtraWhitespace() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "   the     quick   brown    fox        quick       brown      ";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(1, (int) histogramMap.get("the quick"));
         assertEquals(2, (int) histogramMap.get("quick brown"));
@@ -85,24 +85,24 @@ public class HistogramParserTest {
     }
 
     @Test
-    public void parsingEmptyLineShouldNotHaveAnyHistogram() {
+    public void parsingEmptyStringShouldNotHaveAnyHistogram() {
         Map<String, Integer> histogramMap = new HashMap<>();
         String text = "";
 
-        histogramParser.parseLine(histogramMap, text);
+        histogramParser.parseString(histogramMap, text);
 
         assertEquals(0, histogramMap.size());
     }
 
     @Test
-    public void shouldParseLinesOfText() {
+    public void shouldParseListsOfStringsForBigramCount() {
         List<String> linesOfText = Arrays.asList(
             "the quick brown fox and the quick blue hare",
             "the quick brown fox and the quick blue hare",
             "the quick brown fox and the quick blue hare"
         );
 
-        Map<String, Integer> histogramMap = histogramParser.parse(linesOfText);
+        Map<String, Integer> histogramMap = histogramParser.parseForBigramCount(linesOfText);
 
         assertEquals(6, (int) histogramMap.get("the quick"));
         assertEquals(3, (int) histogramMap.get("quick brown"));

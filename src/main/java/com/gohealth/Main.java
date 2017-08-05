@@ -16,7 +16,7 @@ public class Main {
         try {
             List<String> linesOfText = Files.readAllLines(Paths.get(filePath));
             HistogramParser parser = new HistogramParser();
-            Map<String, Integer> histogramMap = parser.parse(linesOfText);
+            Map<String, Integer> histogramMap = parser.parseForBigramCount(linesOfText);
             printHistogram(histogramMap);
         } catch (IOException e) {
             System.out.println("Could not read file");
