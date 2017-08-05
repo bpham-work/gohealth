@@ -6,7 +6,7 @@ Build the jar
 ````
 ./gradlew build
 ````
-Execute the jar with an appropriate file path
+Execute the jar with an appropriate path to a text file
 ````
 java -jar gohealth.jar <path_to_text_file>
 ````
